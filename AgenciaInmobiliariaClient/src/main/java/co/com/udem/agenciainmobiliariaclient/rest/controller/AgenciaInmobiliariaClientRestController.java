@@ -101,10 +101,8 @@ public class AgenciaInmobiliariaClientRestController {
         headers.set("Authorization", token);
         HttpEntity<String> entity = new HttpEntity<String>(headers);
         
-        ResponseEntity<Object[]> response = restTemplate.exchange(baseUrl, HttpMethod.GET, entity, Object[].class);
-       
-        Object[] objects = response.getBody();
-        usuarioDTO = modelMapper.map(objects, UsuarioDTO.class);
+        ResponseEntity<UsuarioDTO> response = restTemplate.exchange(baseUrl, HttpMethod.GET, entity, UsuarioDTO.class);
+        usuarioDTO = modelMapper.map(response.getBody(), UsuarioDTO.class);
         
         return usuarioDTO;       
     }
